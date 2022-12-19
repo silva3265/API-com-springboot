@@ -11,4 +11,6 @@ import br.com.projeto.modelo.Pessoa;
 public interface Repositorio extends CrudRepository<Pessoa, Integer>{
 	
 	List<Pessoa> findAll(); //quando for chamado o findAll ele vai retornar uam lista de pessoas
+	
+	Pessoa findByCodigo (int codigo); 
 }
