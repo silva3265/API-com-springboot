@@ -17,4 +17,8 @@ public interface Repositorio extends CrudRepository<Pessoa, Integer>{
 	List<Pessoa> findByOrderByNome();
 	
 	List<Pessoa> findByNomeContaining(String termo);
+	
+	List<Pessoa> findByNomeStartsWith(String termo);
+	
+	List<Pessoa> findByNomeEndsWith(String termo);
 }

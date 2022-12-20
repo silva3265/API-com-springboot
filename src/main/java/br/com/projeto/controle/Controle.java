@@ -61,6 +61,16 @@ public class Controle {
 	public List<Pessoa> nomeContem(){
 		return acao.findByNomeContaining("l"); //vai listar todas as pessoas que tem o tempo "l"
 	}
+	
+	@GetMapping("/api/iniciaCom")
+	public List<Pessoa> iniciaCom(){
+		return acao.findByNomeStartsWith("o");
+	}
+	
+	@GetMapping("/api/terminaCom")
+	public List<Pessoa> terminaCom(){
+		return acao.findByNomeEndsWith("o");
+	}
 
 	@GetMapping("")
 	public String mensagem() {
