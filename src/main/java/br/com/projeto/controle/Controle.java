@@ -80,7 +80,7 @@ public class Controle {
 	}
 	
 	public List<Pessoa> idadeMaiorIgual(){
-		return acao.idademaiorIgual(18);
+		return acao.idadeMaiorIgual(18);
 	}
 	
 	@GetMapping("")

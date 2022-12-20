@@ -27,7 +27,7 @@ public interface Repositorio extends CrudRepository<Pessoa, Integer>{
 	int somaIdades();
 	
 	@Query(value = "SELECT * FROM pessoa WHERE idade >= :idade", nativeQuery = true)
-	List<Pessoa> idademaiorIgual(int idade);
+	List<Pessoa> idadeMaiorIgual(int idade);
 }
 
 
