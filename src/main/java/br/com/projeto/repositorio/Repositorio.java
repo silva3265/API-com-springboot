@@ -13,4 +13,8 @@ public interface Repositorio extends CrudRepository<Pessoa, Integer>{
 	List<Pessoa> findAll(); //quando for chamado o findAll ele vai retornar uam lista de pessoas
 	
 	Pessoa findByCodigo (int codigo); 
+	
+	List<Pessoa> findByOrderByNome();
+	
+	List<Pessoa> findByNomeContaining(String termo);
 }

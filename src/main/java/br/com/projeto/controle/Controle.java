@@ -49,7 +49,17 @@ public class Controle {
 	
 	@GetMapping("/api/contador")
 	public long contador() {
-		return acao.count();
+		return acao.count(); 
+	}
+	
+	@GetMapping("/api/ordenarNomes")
+	public List<Pessoa> ordenarNomes(){
+		return acao.findByOrderByNome();
+	}
+	
+	@GetMapping("/api/nomeContem")
+	public List<Pessoa> nomeContem(){
+		return acao.findByNomeContaining("l"); //vai listar todas as pessoas que tem o tempo "l"
 	}
 
 	@GetMapping("")
