@@ -71,6 +71,15 @@ public class Controle {
 	public List<Pessoa> terminaCom(){
 		return acao.findByNomeEndsWith("o");
 	}
+	
+	@GetMapping("/api/somaIdades")
+	public int somaIdades() {
+		return acao.somaIdades();
+	}
+	
+	public List<Pessoa> idadeMaiorIgual(){
+		return acao.idademaiorIgual(18);
+	}
 
 	@GetMapping("")
 	public String mensagem() {
