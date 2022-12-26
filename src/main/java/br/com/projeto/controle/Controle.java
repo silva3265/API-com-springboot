@@ -42,8 +42,8 @@ public class Controle {
 	}
 
 	@PutMapping("/api")
-	public Pessoa editar(@RequestBody Pessoa obj) { //No put a gente tem que passar o Objeto completo
-		return acao.save(obj);
+	public ResponseEntity<?> editar(@RequestBody Pessoa obj) { //No put a gente tem que passar o Objeto completo
+		return servico.editar(obj);
 	}
 	
 	@DeleteMapping("/api/{codigo}")
