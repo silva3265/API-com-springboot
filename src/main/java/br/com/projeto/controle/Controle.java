@@ -15,16 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.modelo.Pessoa;
 import br.com.projeto.repositorio.Repositorio;
+import br.com.projeto.servico.Servico;
 
 @RestController
 public class Controle {
 
 	@Autowired
 	private Repositorio acao;
+	
+	@Autowired
+	private Servico servico;
 
 	@PostMapping("/api")
-	public Pessoa cadastrar(@RequestBody Pessoa obj) {
-		return acao.save(obj);
+	public ResponseEntity<?> cadastrar(@RequestBody Pessoa obj) {
+		return servico.cadastrar(obj);
 	}
 
 	@GetMapping("/api")
