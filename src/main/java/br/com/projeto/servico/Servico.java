@@ -1,6 +1,5 @@
 package br.com.projeto.servico;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,66 +11,76 @@ import br.com.projeto.repositorio.Repositorio;
 
 @Service
 public class Servico {
-	
+
 	@Autowired
 	private Mensagem mensagem;
-	
+
 	@Autowired
 	private Repositorio acao;
-	
-	//Metodo para Cadastrar pessoas
-	public ResponseEntity<?> cadastrar(Pessoa obj){ //obj = é um objeto
-		
+
+	// Metodo para Cadastrar pessoas
+	public ResponseEntity<?> cadastrar(Pessoa obj) { // obj = é um objeto
+
 		if (obj.getNome().equals("")) {
 			mensagem.setMensagem("o nome precisa ser preenchido");
 			return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
-		}else if (obj.getIdade() < 0) {
+		} else if (obj.getIdade() < 0) {
 			mensagem.setMensagem("Informe uma idade valida");
-			return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST); 
-		}else {
+			return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+		} else {
 			return new ResponseEntity<>(acao.save(obj), HttpStatus.CREATED);
 		}
 	}
-	
-	//Metodo para Selecionar Pessoas
-	public ResponseEntity<?> selecionar(){
+
+	// Metodo para Selecionar Pessoas
+	public ResponseEntity<?> selecionar() {
 		return new ResponseEntity<>(acao.findAll(), HttpStatus.OK);
 	}
-	
-	//Metodo para selecionar pessoas atraves do codigo
-	public ResponseEntity<?> selecionarPeloCodigo(int codigo){
-		
+
+	// Metodo para selecionar pessoas atraves do codigo
+	public ResponseEntity<?> selecionarPeloCodigo(int codigo) {
+
 		if (acao.countByCodigo(codigo) == 0) {
 			mensagem.setMensagem("Não foi encontrado nenhuma pessoa");
 			return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
-		}else {
+		} else {
 			return new ResponseEntity<>(acao.findByCodigo(codigo), HttpStatus.OK);
 		}
-		
+
 	}
-	
-	//Metodo Para editar dados
-	public ResponseEntity<?> editar(Pessoa obj){
-		
+
+	// Metodo Para editar dados
+	public ResponseEntity<?> editar(Pessoa obj) {
+
 		if (acao.countByCodigo(obj.getCodigo()) == 0) {
 			mensagem.setMensagem("O codigo informado não existe");
 			return new ResponseEntity<>(mensagem, HttpStatus.NOT_FOUND);
-		}else if (obj.getNome().equals("")) {
+		} else if (obj.getNome().equals("")) {
 			mensagem.setMensagem("è necessario informar um nome");
 			return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
-		}else if (obj.getIdade() < 0) {
+		} else if (obj.getIdade() < 0) {
 			mensagem.setMensagem("informe uma idade valida");
-		}	return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
-		
+		}
+		return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+
 	}
-			
+
+	// Metodo para remover registros
+	public ResponseEntity<?> remover(int codigo) {
+
+		if (acao.countByCodigo(codigo) == 0) { // ele vai contar quantos registros a nossa tabela possui com o codigo
+												// que esta acima
+			mensagem.setMensagem("o codigo informado nao existe");
+			return new ResponseEntity<>(mensagem, HttpStatus.NOT_FOUND);
+
+		} else {
+
+			Pessoa obj = acao.findByCodigo(codigo);
+			acao.delete(obj);
+
+			mensagem.setMensagem("Pessoa removida com sucesso");
+			return new ResponseEntity<>(mensagem, HttpStatus.OK);
+		}
+	}
 
 }
-
-
-
-
-
-
-
-
