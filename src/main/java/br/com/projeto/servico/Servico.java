@@ -36,6 +36,18 @@ public class Servico {
 	public ResponseEntity<?> selecionar(){
 		return new ResponseEntity<>(acao.findAll(), HttpStatus.OK);
 	}
+	
+	//Metodo para selecionar pessoas atraves do codigo
+	public ResponseEntity<?> selecionarPeloCodigo(int codigo){
+		
+		if (acao.countByCodigo(codigo) == 0) {
+			mensagem.setMensagem("Não foi encontrado nenhuma pessoa");
+			return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+		}else {
+			return new ResponseEntity<>(acao.findByCodigo(codigo), HttpStatus.OK);
+		}
+		
+	}
 
 }
 
